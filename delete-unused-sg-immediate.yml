@@ -1,0 +1,13 @@
+policies:
+  - name: delete-unused-sg-immediate
+    resource: security-group
+    description: |
+      Delete unused security groups not tagged DoNotDelete or donotdelete
+    filters:
+      - unused 
+      - not:
+          - or:
+            - tag:DoNotDelete: present
+            - tag:donotdelete: present
+    actions:
+      - delete
